@@ -9,7 +9,9 @@ Domain layer: usecase, domain objects, repository interfaces. This layer no depe
 Data layer: repository implementations, data source, entities. This layer depends on domain layer
 
 Frameworks's Apple: Combine
-Third party frameworks: Swinject (use for DI) through SPM
+Third party frameworks: 
+        Swinject (use for DI) through SPM
+        SDWebImage for cache image
 
 3. Required steps in order to get the application run on local computer
 Need the internet connection to install SPM and load data from server
