@@ -24,6 +24,7 @@ class CoreDataManager {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
+        WLog.debug("defaultDirectoryURL: ", NSPersistentContainer.defaultDirectoryURL())
         let container = NSPersistentContainer(name: "Weather")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -57,7 +58,7 @@ class CoreDataManager {
                 try self?.backgroundContext.save()
                 completion(true)
             } catch {
-                print("Save error \(error)")
+                WLog.debug("Save error \(error)")
                 completion(false)
             }
         }

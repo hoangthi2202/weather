@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-protocol SearchDailyWeatherUseCaseProtocol {
-    func execute(cityName: String, numberDays: Int, units: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError>
-}
-
 class SearchDailyWeatherUseCase {
     private let repository: WeatherRepositoryProtocol
     init(repository: WeatherRepositoryProtocol) {
@@ -19,7 +15,7 @@ class SearchDailyWeatherUseCase {
     }
 }
 
-extension SearchDailyWeatherUseCase: SearchDailyWeatherUseCaseProtocol {
+extension SearchDailyWeatherUseCase: SearchWeatherUseCaseProtocol {
     func execute(cityName: String, numberDays: Int, units: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
         repository.searchWithParam([
             "q"     : cityName,

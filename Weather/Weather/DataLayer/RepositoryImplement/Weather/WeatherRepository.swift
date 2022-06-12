@@ -31,11 +31,6 @@ extension WeatherRepository: WeatherRepositoryProtocol {
                     return
                 }
                 
-                if let error = localError {
-                    promise(.failure(error))
-                    return
-                }
-                
                 if let domainCities = domainCities, domainCities.count > 0 {
                     promise(.success(.succeed(domainCities)))
                     return
@@ -73,6 +68,7 @@ extension WeatherRepository: WeatherRepositoryProtocol {
 // MARK: - Private functions
 extension WeatherRepository {
     private func searchInLocalStorageWithParam(_ param: [String: String], completion: @escaping ([DomainCity]?, RepositoryError?) -> Void) {
+        WLog.debug("search Weather on local storage")
         localStorage.searchWeatherWithParam(param)
             .sink(receiveCompletion: { result in
                 switch result {
@@ -94,6 +90,7 @@ extension WeatherRepository {
     }
     
     private func searchOnServerWithParam(_ param: [String: String], completion: @escaping ([DomainCity]?, RepositoryError?) -> Void) {
+        WLog.debug("search Weather on server")
         remoteApi.searchWeatherWithParam(param)
             .sink(receiveCompletion: { result in
                 switch result {
@@ -115,18 +112,20 @@ extension WeatherRepository {
     }
     
     private func saveToLocalStorate(domainCities: [DomainCity]) {
+        WLog.debug("save Weather to local storage")
         localStorage.saveWeather(domainCities)
             .sink(receiveCompletion: { result in
                 switch result {
-                case .finished: break
+                case .finished:
+                    WLog.debug("Weather repository save success")
                 case .failure(let error):
-                    print("Weather repository save error: \(error)")
+                    WLog.debug("Weather repository save error: \(error)")
                 }
             }, receiveValue: { response in
                 if response {
-                    print("Weather repository saved successfully")
+                    WLog.debug("Weather repository saved successfully")
                 } else {
-                    print("Weather repository cannot save")
+                    WLog.debug("Weather repository cannot save")
                 }
             })
             .store(in: &cancellables)

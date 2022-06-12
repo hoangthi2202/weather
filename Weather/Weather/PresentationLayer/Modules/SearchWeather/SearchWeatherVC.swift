@@ -12,18 +12,13 @@ protocol SearchWeatherViewProtocol: AnyObject {
 }
 
 class SearchWeatherVC: UIViewController {
-
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
+    
     var presenter: SearchWeatherPresenterProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
-        let interactor = SearchWeatherInteractor()
-        let wireFrame = SearchWeatherWireFrame()
-        wireFrame.setupWithPresentedVC(self)
-        presenter = SearchWeatherPresenter(
-            interactor: interactor,
-            wireFrame: wireFrame,
-            view: self
-        )
         presenter?.viewDidLoad()
     }
 }

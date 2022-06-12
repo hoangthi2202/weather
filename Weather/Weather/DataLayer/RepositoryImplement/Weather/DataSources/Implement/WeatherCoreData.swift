@@ -50,7 +50,10 @@ extension WeatherCoreData: WeatherDatabase {
                     return
                 }
                 
-                guard let cityEntities = CityEntity.searchCityByName(cityName, inContext: context) else {
+                guard
+                    let cityEntities = CityEntity.searchCityByName(cityName, inContext: context),
+                    cityEntities.count > 0
+                else {
                     promise(.failure(.notFound))
                     return
                 }

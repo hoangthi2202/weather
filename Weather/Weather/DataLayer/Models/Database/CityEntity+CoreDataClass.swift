@@ -20,7 +20,7 @@ public class CityEntity: NSManagedObject {
             let objects = try context.fetch(fetchRequest)
             return objects.count > 0
         } catch {
-            print("[Core Data] existCityId error: \(error)")
+            WLog.debug("[Core Data] existCityId error: \(error)")
         }
         return false
     }
@@ -28,7 +28,7 @@ public class CityEntity: NSManagedObject {
     static func searchCityByName(_ cityName: String, inContext context: NSManagedObjectContext) -> [CityEntity]? {
         let request: NSFetchRequest<CityEntity> = CityEntity.fetchRequest()
         request.predicate = NSPredicate(
-            format: "name CONTAINS %@", cityName
+            format: "name CONTAINS[c] %@", cityName
         )
         let results = try? context.fetch(request)
         return results

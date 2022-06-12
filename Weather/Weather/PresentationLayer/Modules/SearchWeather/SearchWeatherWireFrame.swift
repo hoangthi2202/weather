@@ -13,9 +13,22 @@ protocol SearchWeatherWireFrameProtocol {
 }
 
 class SearchWeatherWireFrame {
-    private var presentedVC: UIViewController?
-    func setupWithPresentedVC(_ pushedVC: UIViewController) {
-        presentedVC = pushedVC
+    func setupWithRootNavVC(_ navVC: UINavigationController) {
+        let vc = SearchWeatherVC(nibName: "SearchWeatherVC", bundle: nil)
+        let apiConfig = WeatherApiConfiguration()
+        let remoteApi = RemoteDailyApi(apiConfig: apiConfig)
+        let localStorage = WeatherCoreData()
+        let repository = WeatherRepository(remoteApi: remoteApi, localStorage: localStorage)
+        let useCase = SearchDailyWeatherUseCase(repository: repository)
+        let interactor = SearchWeatherInteractor(searchUseCase: useCase)
+        let wireFrame = SearchWeatherWireFrame()
+        let presenter = SearchWeatherPresenter(
+            interactor: interactor,
+            wireFrame: wireFrame,
+            view: vc
+        )
+        vc.presenter = presenter
+        navVC.viewControllers = [vc]
     }
 }
 
