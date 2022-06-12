@@ -14,6 +14,7 @@ extension UITableView {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = .gray
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         backgroundView = label
     }
 }

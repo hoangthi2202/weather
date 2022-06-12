@@ -69,6 +69,8 @@ extension SearchWeatherVC {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.leastNormalMagnitude))
+        // DataSource
         dataSource = WeatherTableViewDataSource(
             tableView: tableView,
             parseWeatherCellModelBlock: { [weak self] domainWeather in
@@ -84,6 +86,7 @@ extension SearchWeatherVC {
         }
         presenter?.searchWithCityName(searchingText)
     }
+    
     private func bindData() {
         $searchingText
             .filter { $0.count >= 3 }
