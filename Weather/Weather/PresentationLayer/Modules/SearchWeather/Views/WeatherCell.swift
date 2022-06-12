@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 struct WeatherCellModel {
     let dateStr: String
@@ -40,6 +41,16 @@ class WeatherCell: UITableViewCell {
         pressure.text = model.pressureStr
         lblHumidity.text = model.humidityStr
         lblDesc.text = model.desc
+        imgIcon.sd_setImage(
+            with: model.iconURL,
+            placeholderImage: nil,
+            options: .retryFailed,
+            completed: { _, error, _, _ in
+                if let error = error {
+                    WLog.debug(error)
+                }
+            }
+        )
     }
     
 }

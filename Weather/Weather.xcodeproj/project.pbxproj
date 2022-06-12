@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		87854B6D28558934008021C8 /* WLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87854B6C28558934008021C8 /* WLog.swift */; };
 		87854B6F2855B45A008021C8 /* GetIconURLUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87854B6E2855B45A008021C8 /* GetIconURLUseCase.swift */; };
+		87854B722855BB12008021C8 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 87854B712855BB12008021C8 /* SDWebImage */; };
+		87854B752855BB6E008021C8 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 87854B742855BB6E008021C8 /* Swinject */; };
 		87B8ECBA285431EE005F0078 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B8ECB9285431EE005F0078 /* AppDelegate.swift */; };
 		87B8ECBC285431EE005F0078 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B8ECBB285431EE005F0078 /* SceneDelegate.swift */; };
 		87B8ECC1285431EE005F0078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87B8ECBF285431EE005F0078 /* Main.storyboard */; };
@@ -123,6 +125,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87854B722855BB12008021C8 /* SDWebImage in Frameworks */,
+				87854B752855BB6E008021C8 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +512,10 @@
 			dependencies = (
 			);
 			name = Weather;
+			packageProductDependencies = (
+				87854B712855BB12008021C8 /* SDWebImage */,
+				87854B742855BB6E008021C8 /* Swinject */,
+			);
 			productName = Weather;
 			productReference = 87B8ECB6285431EE005F0078 /* Weather.app */;
 			productType = "com.apple.product-type.application";
@@ -580,6 +588,10 @@
 				Base,
 			);
 			mainGroup = 87B8ECAD285431EE005F0078;
+			packageReferences = (
+				87854B702855BB12008021C8 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				87854B732855BB6E008021C8 /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			productRefGroup = 87B8ECB7285431EE005F0078 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1002,6 +1014,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		87854B702855BB12008021C8 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		87854B732855BB6E008021C8 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		87854B712855BB12008021C8 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 87854B702855BB12008021C8 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		87854B742855BB6E008021C8 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 87854B732855BB6E008021C8 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		87B8ECC2285431EE005F0078 /* Weather.xcdatamodeld */ = {
