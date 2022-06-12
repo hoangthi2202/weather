@@ -10,9 +10,9 @@ import Combine
 
 class WeatherRepository {
     private let remoteApi: WeatherApi
-    private let localStorage: WeatherDatabase
+    private let localStorage: WeatherStorage
     private var cancellables = [AnyCancellable]()
-    init(remoteApi: WeatherApi, localStorage: WeatherDatabase) {
+    init(remoteApi: WeatherApi, localStorage: WeatherStorage) {
         self.remoteApi = remoteApi
         self.localStorage = localStorage
     }
@@ -24,7 +24,7 @@ extension WeatherRepository: WeatherRepositoryProtocol {
             guard let weakSelf = self else {
                 return
             }
-            
+            WLog.debug("WeatherRepository search with param: ", param)
             // check local storage
             weakSelf.searchInLocalStorageWithParam(param) { [weak self] domainCities, localError in
                 guard let weakSelf = self else {
@@ -72,8 +72,12 @@ extension WeatherRepository: WeatherRepositoryProtocol {
 // MARK: - Private functions
 extension WeatherRepository {
     private func searchInLocalStorageWithParam(_ param: [String: String], completion: @escaping ([DomainCity]?, RepositoryError?) -> Void) {
-        WLog.debug("search Weather on local storage")
-        localStorage.searchWeatherWithParam(param)
+        WLog.debug("WeatherRepository search in local")
+        guard let cityName = param["q"] else {
+            completion(nil, .notFound)
+            return
+        }
+        localStorage.searchWeatherWithCityName(cityName)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .finished: break
@@ -83,6 +87,7 @@ extension WeatherRepository {
             }, receiveValue: { response in
                 switch response {
                 case .succeed(let domainCities):
+                    WLog.debug("WeatherRepository found data in local")
                     completion(domainCities, nil)
                     break
                 case .failed(message: let message):
@@ -94,7 +99,7 @@ extension WeatherRepository {
     }
     
     private func searchOnServerWithParam(_ param: [String: String], completion: @escaping ([DomainCity]?, RepositoryError?) -> Void) {
-        WLog.debug("search Weather on server")
+        WLog.debug("WeatherRepository search on server")
         remoteApi.searchWeatherWithParam(param)
             .sink(receiveCompletion: { result in
                 switch result {
@@ -105,6 +110,7 @@ extension WeatherRepository {
             }, receiveValue: { response in
                 switch response {
                 case .succeed(let domainCities):
+                    WLog.debug("WeatherRepository finish search on server")
                     completion(domainCities, nil)
                     break
                 case .failed(message: let message):
@@ -116,20 +122,19 @@ extension WeatherRepository {
     }
     
     private func saveToLocalStorate(domainCities: [DomainCity]) {
-        WLog.debug("save Weather to local storage")
+        WLog.debug("WeatherRepository save to local")
         localStorage.saveWeather(domainCities)
             .sink(receiveCompletion: { result in
                 switch result {
-                case .finished:
-                    WLog.debug("Weather repository save success")
+                case .finished: break
                 case .failure(let error):
-                    WLog.debug("Weather repository save error: \(error)")
+                    WLog.debug("WeatherRepository save error: \(error)")
                 }
             }, receiveValue: { response in
                 if response {
-                    WLog.debug("Weather repository saved successfully")
+                    WLog.debug("WeatherRepository saved successfully")
                 } else {
-                    WLog.debug("Weather repository cannot save")
+                    WLog.debug("WeatherRepository cannot save")
                 }
             })
             .store(in: &cancellables)

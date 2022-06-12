@@ -47,7 +47,7 @@ class WeatherCell: UITableViewCell {
             options: .retryFailed,
             completed: { _, error, _, _ in
                 if let error = error {
-                    WLog.debug(error)
+                    WLog.debug("WeatherCell load image error: ",error)
                 }
             }
         )

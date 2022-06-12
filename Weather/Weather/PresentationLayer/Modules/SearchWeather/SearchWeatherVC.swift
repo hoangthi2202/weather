@@ -9,8 +9,8 @@ import UIKit
 import Combine
 
 protocol SearchWeatherViewProtocol: AnyObject {
-    func searchWeatherUpdateWithData(_ data: DomainCity)
-    func searchWeatherShowErrorMessage(_ message: String)
+    func updateUIWithData(_ data: DomainCity)
+    func showErrorMessage(_ message: String)
 }
 
 class SearchWeatherVC: BaseViewController {
@@ -27,18 +27,15 @@ class SearchWeatherVC: BaseViewController {
         presenter?.viewDidLoad()
         setupView()
         bindData()
-        dataSource = WeatherTableViewDataSource(tableView: tableView, parseWeatherCellModelBlock: { [weak self] domainWeather in
-            self?.presenter?.getCellModelOf(domainWeather)
-        })
     }
 }
 
 extension SearchWeatherVC: SearchWeatherViewProtocol {
-    func searchWeatherUpdateWithData(_ data: DomainCity) {
+    func updateUIWithData(_ data: DomainCity) {
         dataSource?.updateData(data.weathers)
     }
     
-    func searchWeatherShowErrorMessage(_ message: String) {
+    func showErrorMessage(_ message: String) {
         showAlert(message: message)
     }
 }
@@ -61,6 +58,12 @@ extension SearchWeatherVC: UISearchBarDelegate {
 extension SearchWeatherVC {
     private func setupView() {
         title = "Weather Forecast"
+        dataSource = WeatherTableViewDataSource(
+            tableView: tableView,
+            parseWeatherCellModelBlock: { [weak self] domainWeather in
+                self?.presenter?.getCellModelOf(domainWeather)
+            }
+        )
     }
     private func bindData() {
         $searchingText

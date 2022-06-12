@@ -30,7 +30,7 @@ extension DomainCity {
         )
     }
     
-    static func createByDailyCity(_ dailyCity: DailyCity) -> DomainCity {
+    static func createByDailyCity(_ dailyCity: WeatherData) -> DomainCity {
         var weathers = [DomainWeather]()
         for list in dailyCity.list {
             let weather = DomainWeather(

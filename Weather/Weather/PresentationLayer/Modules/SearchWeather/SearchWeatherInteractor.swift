@@ -24,7 +24,11 @@ class SearchWeatherInteractor {
 
 extension SearchWeatherInteractor: SearchWeatherInteractorProtocol {
     func searchWithCityName(_ cityName: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
-        searchUseCase.execute(cityName: cityName, numberDays: 10, units: "metric")
+        searchUseCase.execute(
+            cityName: cityName,
+            numberDays: 10,
+            units: "metric"
+        )
     }
     
     func getURLForIconId(_ iconId: String) -> URL? {

@@ -16,11 +16,11 @@ Third party frameworks:
 3. Required steps in order to get the application run on local computer
 Need the internet connection to install SPM and load data from server
 4. Feature checklist
-Design app's architecture: VIPER
-UI should be looks like in attachment
+- Design app's architecture: VIPER
+- UI should be looks like in attachment
 UnitTests
 Acceptance Tests
 Exception handling
-Caching handling
+- Caching handling
 Accessibility for Disability Supports: VoiceOver, Scaling Text
-Entity
+- Entity

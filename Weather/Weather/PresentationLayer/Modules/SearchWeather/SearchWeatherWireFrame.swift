@@ -7,35 +7,17 @@
 
 import Foundation
 import UIKit
+import Swinject
 
 protocol SearchWeatherWireFrameProtocol {
-    
 }
 
 class SearchWeatherWireFrame {
     func setupWithRootNavVC(_ navVC: UINavigationController) {
-        let vc = SearchWeatherVC(nibName: "SearchWeatherVC", bundle: nil)
-        let apiConfig = WeatherApiConfiguration()
-        let remoteApi = RemoteDailyApi(apiConfig: apiConfig)
-        let localStorage = WeatherCoreData()
-        let repository = WeatherRepository(remoteApi: remoteApi, localStorage: localStorage)
-        let useCase = SearchDailyWeatherUseCase(repository: repository)
-        let getIconURLUseCase = GetIconURLUseCase(repository: repository)
-        let interactor = SearchWeatherInteractor(
-            searchUseCase: useCase,
-            getIconURLUseCase: getIconURLUseCase
-        )
-        let wireFrame = SearchWeatherWireFrame()
-        let presenter = SearchWeatherPresenter(
-            interactor: interactor,
-            wireFrame: wireFrame,
-            view: vc
-        )
-        vc.presenter = presenter
+        let vc = Assembler.shared.resolver.resolve(SearchWeatherVC.self, argument: self as SearchWeatherWireFrameProtocol)!
         navVC.viewControllers = [vc]
     }
 }
 
 extension SearchWeatherWireFrame: SearchWeatherWireFrameProtocol {
-    
 }

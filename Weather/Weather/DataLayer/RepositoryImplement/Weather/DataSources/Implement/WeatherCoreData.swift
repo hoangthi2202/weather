@@ -12,7 +12,7 @@ import CoreData
 class WeatherCoreData: CoreDataManager {
 }
 
-extension WeatherCoreData: WeatherDatabase {
+extension WeatherCoreData: WeatherStorage {
     func saveWeather(_ domainCites: [DomainCity]) -> AnyPublisher<Bool, RepositoryError> {
         Future<Bool, RepositoryError> { [weak self] promise in
             self?.performOnBGContext { [weak self] context in
@@ -41,11 +41,10 @@ extension WeatherCoreData: WeatherDatabase {
         }
         .eraseToAnyPublisher()
     }
-    
-    func searchWeatherWithParam(_ param: [String : String]) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
+    func searchWeatherWithCityName(_ cityName: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
         Future<Response<[DomainCity]>, RepositoryError> { [weak self] promise in
             self?.performOnMainContext { context in
-                guard let cityName = param["q"] else {
+                guard cityName.count > 0 else {
                     promise(.failure(.notFound))
                     return
                 }

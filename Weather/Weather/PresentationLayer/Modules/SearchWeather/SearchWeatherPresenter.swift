@@ -39,19 +39,17 @@ extension SearchWeatherPresenter: SearchWeatherPresenterProtocol {
                 switch result {
                 case .failure(let error):
                     WLog.debug("SearchWeatherPresenter failure: \(error)")
-                    self.view?.searchWeatherShowErrorMessage(error.localizedDescription)
+                    self.view?.showErrorMessage(error.message())
                 case .finished:
                     WLog.debug("SearchWeatherPresenter finished")
                 }
             } receiveValue: { response in
-                WLog.debug("response: \(response)")
                 switch response {
                 case .succeed(let cities):
-                    self.view?.searchWeatherUpdateWithData(cities.first!)
+                    self.view?.updateUIWithData(cities.first!)
                 case .failed(message: let message):
-                    self.view?.searchWeatherShowErrorMessage(message)
+                    self.view?.showErrorMessage(message)
                 }
-                
             }
             .store(in: &cancellables)
     }

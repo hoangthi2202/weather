@@ -26,7 +26,7 @@ extension RemoteDailyApi: WeatherApi {
         let urlString = param.reduce("\(apiConfig.baseURLString)/forecast/daily?appid=\(apiConfig.appAPI ?? "")") { partialResult, value in
             return "\(partialResult)&\(value.0)=\(value.1)"
         }
-        WLog.debug("searchWeatherWithParam: ", urlString)
+        WLog.debug("RemoteDailyApi request: ", urlString)
         
         guard let url = URL(string: urlString) else {
             return Fail(error: RepositoryError.urlNotCorrect).eraseToAnyPublisher()
@@ -34,18 +34,23 @@ extension RemoteDailyApi: WeatherApi {
         
         return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { element -> Data in
-                WLog.debug("Response: ", element.response)
+                //WLog.debug("RemoteDailyApi Response: ", element.response)
+                var jsonDict: [String: Any]?
                 do {
                     if let json = try JSONSerialization.jsonObject(with: element.data, options: []) as? [String: Any] {
-                        WLog.debug("Data json: ", json)
+                        jsonDict = json
+                        WLog.debug("RemoteDailyApi json: ", json)
                     }
                 } catch let error as NSError {
-                    WLog.debug("Failed to load: \(error.localizedDescription)")
+                    WLog.debug("RemoteDailyApi Failed to parse: \(error.localizedDescription)")
                 }
                 
                 guard let response = element.response as? HTTPURLResponse,
                       200..<300 ~= response.statusCode
                 else {
+                    if let message = jsonDict?["message"] as? String {
+                        throw RepositoryError.unknown(message: message)
+                    }
                     throw URLError(.badServerResponse)
                 }
                 return element.data
@@ -56,13 +61,18 @@ extension RemoteDailyApi: WeatherApi {
                 }
                 return RepositoryError.unknown(message: error.localizedDescription)
             }
-            .decode(type: DailyCity.self, decoder: JSONDecoder())
+            .decode(type: WeatherData.self, decoder: JSONDecoder())
             .map({ dailyCity in
                 let domainCity = DomainCity.createByDailyCity(dailyCity)
                 return Response.succeed([domainCity])
             })
-            .catch {
-                Fail(error: RepositoryError.unknown(message: $0.localizedDescription)).eraseToAnyPublisher()
+            .catch { error -> AnyPublisher<Response<[DomainCity]>, RepositoryError> in
+                // Local Error
+                if let error = error as? RepositoryError {
+                    return Fail(error: error).eraseToAnyPublisher()
+                }
+                
+                return Fail(error: RepositoryError.unknown(message: error.localizedDescription)).eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }

@@ -1,5 +1,5 @@
 //
-//  DailyCity.swift
+//  WeatherData.swift
 //  Weather
 //
 //  Created by Hoang Thi on 11/06/2022.
@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Welcome
-struct DailyCity: Codable {
+struct WeatherData: Codable {
     let city: City
     let cod: String
     let message: Double

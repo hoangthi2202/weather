@@ -11,4 +11,11 @@ enum RepositoryError: Error {
     case unknown(message: String)
     case notFound
     case urlNotCorrect
+    
+    func message() -> String {
+        switch self {
+        case .unknown(message: let messge): return messge
+        default: return self.localizedDescription
+        }
+    }
 }
