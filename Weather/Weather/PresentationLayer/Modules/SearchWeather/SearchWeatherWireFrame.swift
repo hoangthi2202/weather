@@ -20,7 +20,11 @@ class SearchWeatherWireFrame {
         let localStorage = WeatherCoreData()
         let repository = WeatherRepository(remoteApi: remoteApi, localStorage: localStorage)
         let useCase = SearchDailyWeatherUseCase(repository: repository)
-        let interactor = SearchWeatherInteractor(searchUseCase: useCase)
+        let getIconURLUseCase = GetIconURLUseCase(repository: repository)
+        let interactor = SearchWeatherInteractor(
+            searchUseCase: useCase,
+            getIconURLUseCase: getIconURLUseCase
+        )
         let wireFrame = SearchWeatherWireFrame()
         let presenter = SearchWeatherPresenter(
             interactor: interactor,

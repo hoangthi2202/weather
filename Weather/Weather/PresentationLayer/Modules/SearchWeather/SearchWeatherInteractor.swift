@@ -10,17 +10,24 @@ import Combine
 
 protocol SearchWeatherInteractorProtocol {
     func searchWithCityName(_ cityName: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError>
+    func getURLForIconId(_ iconId: String) -> URL?
 }
 
 class SearchWeatherInteractor {
     private let searchUseCase: SearchWeatherUseCaseProtocol
-    init(searchUseCase: SearchWeatherUseCaseProtocol) {
+    private let getIconURLUseCase: GetIconURLUseCaseProtocol
+    init(searchUseCase: SearchWeatherUseCaseProtocol, getIconURLUseCase: GetIconURLUseCaseProtocol) {
         self.searchUseCase = searchUseCase
+        self.getIconURLUseCase = getIconURLUseCase
     }
 }
 
 extension SearchWeatherInteractor: SearchWeatherInteractorProtocol {
     func searchWithCityName(_ cityName: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
         searchUseCase.execute(cityName: cityName, numberDays: 10, units: "metric")
+    }
+    
+    func getURLForIconId(_ iconId: String) -> URL? {
+        getIconURLUseCase.execute(iconId: iconId)
     }
 }

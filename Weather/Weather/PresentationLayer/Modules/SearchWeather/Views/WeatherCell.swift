@@ -7,6 +7,15 @@
 
 import UIKit
 
+struct WeatherCellModel {
+    let dateStr: String
+    let averageTempStr: String
+    let pressureStr: String
+    let humidityStr: String
+    let desc: String
+    let iconURL: URL?
+}
+
 class WeatherCell: UITableViewCell {
 
     @IBOutlet weak var lblDate: UILabel!
@@ -25,12 +34,12 @@ class WeatherCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupWith(_ object: DomainWeather) {
-        lblDate.text = "Date: \(object.date.formatString())"
-        lblAverage.text = "Average Temperature: \(object.averageTemp)"
-        pressure.text = "Pressure: \(object.pressure)"
-        lblHumidity.text = "Humidity: \(object.humidity)"
-        lblDesc.text = "Description: \(object.desc)"
+    func setupWithModel(_ model: WeatherCellModel) {
+        lblDate.text = model.dateStr
+        lblAverage.text = model.averageTempStr
+        pressure.text = model.pressureStr
+        lblHumidity.text = model.humidityStr
+        lblDesc.text = model.desc
     }
     
 }

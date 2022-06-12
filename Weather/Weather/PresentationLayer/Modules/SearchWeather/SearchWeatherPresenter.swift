@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 protocol SearchWeatherPresenterProtocol: BasePresenterProtocol {
-    
+    func searchWithCityName(_ cityName: String)
+    func getCellModelOf(_ object: DomainWeather) -> WeatherCellModel
 }
 
 class SearchWeatherPresenter {
@@ -26,21 +27,43 @@ class SearchWeatherPresenter {
 
 extension SearchWeatherPresenter: BasePresenterProtocol {
     func viewDidLoad() {
-        interactor.searchWithCityName("hanoi")
+        searchWithCityName("hanoi")
+    }
+}
+
+extension SearchWeatherPresenter: SearchWeatherPresenterProtocol {
+    func searchWithCityName(_ cityName: String) {
+        interactor.searchWithCityName(cityName)
+            .receive(on: DispatchQueue.main)
             .sink { result in
                 switch result {
                 case .failure(let error):
                     WLog.debug("SearchWeatherPresenter failure: \(error)")
+                    self.view?.searchWeatherShowErrorMessage(error.localizedDescription)
                 case .finished:
                     WLog.debug("SearchWeatherPresenter finished")
                 }
             } receiveValue: { response in
                 WLog.debug("response: \(response)")
+                switch response {
+                case .succeed(let cities):
+                    self.view?.searchWeatherUpdateWithData(cities.first!)
+                case .failed(message: let message):
+                    self.view?.searchWeatherShowErrorMessage(message)
+                }
+                
             }
             .store(in: &cancellables)
     }
-}
-
-extension SearchWeatherPresenter: SearchWeatherPresenterProtocol {
     
+    func getCellModelOf(_ object: DomainWeather) -> WeatherCellModel {
+        WeatherCellModel(
+            dateStr: "Date: \(object.date.formatString())",
+            averageTempStr: "Average Temperature: \(Int(object.averageTemp))°C ",
+            pressureStr: "Pressure: \(Int(object.pressure))",
+            humidityStr: "Humidity: \(Int(object.humidity))%",
+            desc: "Description: \(object.desc)",
+            iconURL: interactor.getURLForIconId(object.iconId)
+        )
+    }
 }

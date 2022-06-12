@@ -63,6 +63,10 @@ extension WeatherRepository: WeatherRepositoryProtocol {
         }
         .eraseToAnyPublisher()
     }
+    
+    func getURLForIconId(_ iconId: String) -> URL? {
+        remoteApi.getUrlForIconId(iconId)
+    }
 }
 
 // MARK: - Private functions

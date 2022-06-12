@@ -27,9 +27,11 @@ extension RemoteDailyApi: WeatherApi {
             return "\(partialResult)&\(value.0)=\(value.1)"
         }
         WLog.debug("searchWeatherWithParam: ", urlString)
+        
         guard let url = URL(string: urlString) else {
             return Fail(error: RepositoryError.urlNotCorrect).eraseToAnyPublisher()
         }
+        
         return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { element -> Data in
                 WLog.debug("Response: ", element.response)

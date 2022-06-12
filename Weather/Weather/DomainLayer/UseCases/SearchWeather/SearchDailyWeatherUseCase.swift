@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+protocol SearchWeatherUseCaseProtocol {
+    func execute(cityName: String, numberDays: Int, units: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError>
+}
+
 class SearchDailyWeatherUseCase {
     private let repository: WeatherRepositoryProtocol
     init(repository: WeatherRepositoryProtocol) {

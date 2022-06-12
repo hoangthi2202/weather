@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87854B6D28558934008021C8 /* WLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87854B6C28558934008021C8 /* WLog.swift */; };
+		87854B6F2855B45A008021C8 /* GetIconURLUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87854B6E2855B45A008021C8 /* GetIconURLUseCase.swift */; };
 		87B8ECBA285431EE005F0078 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B8ECB9285431EE005F0078 /* AppDelegate.swift */; };
 		87B8ECBC285431EE005F0078 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B8ECBB285431EE005F0078 /* SceneDelegate.swift */; };
 		87B8ECC1285431EE005F0078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87B8ECBF285431EE005F0078 /* Main.storyboard */; };
@@ -48,7 +49,6 @@
 		87C1CA4A2854C3D0001BA1CC /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C1CA482854C3D0001BA1CC /* WeatherCell.xib */; };
 		87C1CA4D2854C5EC001BA1CC /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C1CA4C2854C5EC001BA1CC /* Date+.swift */; };
 		87C5F69A28557F8600C89675 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C5F69928557F8600C89675 /* RootNavigationController.swift */; };
-		87C5F69C285583A200C89675 /* SearchWeatherUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C5F69B285583A200C89675 /* SearchWeatherUseCaseProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		87854B6C28558934008021C8 /* WLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WLog.swift; sourceTree = "<group>"; };
+		87854B6E2855B45A008021C8 /* GetIconURLUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIconURLUseCase.swift; sourceTree = "<group>"; };
 		87B8ECB6285431EE005F0078 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87B8ECB9285431EE005F0078 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87B8ECBB285431EE005F0078 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,7 +116,6 @@
 		87C1CA482854C3D0001BA1CC /* WeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
 		87C1CA4C2854C5EC001BA1CC /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		87C5F69928557F8600C89675 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
-		87C5F69B285583A200C89675 /* SearchWeatherUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWeatherUseCaseProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				87B8ED1A285448E1005F0078 /* SearchWeather */,
-				87C5F69B285583A200C89675 /* SearchWeatherUseCaseProtocol.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -412,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				87B8ED1B2854490A005F0078 /* SearchDailyWeatherUseCase.swift */,
+				87854B6E2855B45A008021C8 /* GetIconURLUseCase.swift */,
 			);
 			path = SearchWeather;
 			sourceTree = "<group>";
@@ -625,6 +625,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87854B6F2855B45A008021C8 /* GetIconURLUseCase.swift in Sources */,
 				87B8ED2C28545112005F0078 /* WeatherApi.swift in Sources */,
 				87B8ECC4285431EE005F0078 /* Weather.xcdatamodeld in Sources */,
 				87C1CA492854C3D0001BA1CC /* WeatherCell.swift in Sources */,
@@ -655,7 +656,6 @@
 				87C1CA3C2854937D001BA1CC /* WeatherEntity+CoreDataProperties.swift in Sources */,
 				87B8ED1C2854490A005F0078 /* SearchDailyWeatherUseCase.swift in Sources */,
 				87B8ED192854489E005F0078 /* RepositoryError.swift in Sources */,
-				87C5F69C285583A200C89675 /* SearchWeatherUseCaseProtocol.swift in Sources */,
 				87B8ED2828545071005F0078 /* WeatherRepository.swift in Sources */,
 				87B8ED0428544389005F0078 /* SearchWeatherPresenter.swift in Sources */,
 				87C1CA3E2854937D001BA1CC /* CityEntity+CoreDataProperties.swift in Sources */,

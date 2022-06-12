@@ -10,4 +10,5 @@ import Combine
 
 protocol WeatherRepositoryProtocol {
     func searchWithParam(_ param: [String: String]) -> AnyPublisher<Response<[DomainCity]>, RepositoryError>
+    func getURLForIconId(_ iconId: String) -> URL?
 }
