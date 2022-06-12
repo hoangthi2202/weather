@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 protocol SearchWeatherViewProtocol: AnyObject {
-    func updateUIWithData(_ data: DomainCity)
+    func updateUIWithData(_ data: DomainCity?)
     func showErrorMessage(_ message: String)
 }
 
@@ -17,6 +17,7 @@ class SearchWeatherVC: BaseViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    private var refreshControl: UIRefreshControl?
     
     @Published var searchingText: String = ""
     var presenter: SearchWeatherPresenterProtocol?
@@ -31,12 +32,18 @@ class SearchWeatherVC: BaseViewController {
 }
 
 extension SearchWeatherVC: SearchWeatherViewProtocol {
-    func updateUIWithData(_ data: DomainCity) {
-        dataSource?.updateData(data.weathers)
+    func updateUIWithData(_ data: DomainCity?) {
+        dataSource?.updateData(data?.weathers)
+        if data != nil {
+            tableView.backgroundView = nil
+        }
+        refreshControl?.endRefreshing()
     }
     
     func showErrorMessage(_ message: String) {
-        showAlert(message: message)
+        tableView.showMessage(message.capitalized)
+        refreshControl?.endRefreshing()
+        //showAlert(message: message)
     }
 }
 
@@ -58,6 +65,10 @@ extension SearchWeatherVC: UISearchBarDelegate {
 extension SearchWeatherVC {
     private func setupView() {
         title = "Weather Forecast"
+        tableView.showMessage("Please type a city name")
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         dataSource = WeatherTableViewDataSource(
             tableView: tableView,
             parseWeatherCellModelBlock: { [weak self] domainWeather in
@@ -65,8 +76,17 @@ extension SearchWeatherVC {
             }
         )
     }
+    
+    @objc private func refresh() {
+        if searchingText.count < 3 {
+            refreshControl?.endRefreshing()
+            return
+        }
+        presenter?.searchWithCityName(searchingText)
+    }
     private func bindData() {
         $searchingText
+            .filter { $0.count >= 3 }
             .removeDuplicates()
             .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
             .sink(receiveValue: { [weak self ] value in

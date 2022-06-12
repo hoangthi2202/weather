@@ -36,6 +36,7 @@ extension WeatherCoreData: WeatherStorage {
                     if saved {
                         self?.saveContext()
                     }
+                    promise(.success(saved))
                 }
             }
         }

@@ -27,7 +27,7 @@ class SearchWeatherPresenter {
 
 extension SearchWeatherPresenter: BasePresenterProtocol {
     func viewDidLoad() {
-        searchWithCityName("hanoi")
+        // searchWithCityName("hanoi")
     }
 }
 
@@ -35,20 +35,23 @@ extension SearchWeatherPresenter: SearchWeatherPresenterProtocol {
     func searchWithCityName(_ cityName: String) {
         interactor.searchWithCityName(cityName)
             .receive(on: DispatchQueue.main)
-            .sink { result in
+            .sink { [weak self] result in
                 switch result {
                 case .failure(let error):
                     WLog.debug("SearchWeatherPresenter failure: \(error)")
-                    self.view?.showErrorMessage(error.message())
+                    self?.view?.showErrorMessage(error.message())
+                    self?.view?.updateUIWithData(nil)
                 case .finished:
                     WLog.debug("SearchWeatherPresenter finished")
                 }
-            } receiveValue: { response in
+            } receiveValue: { [weak self] response in
                 switch response {
                 case .succeed(let cities):
-                    self.view?.updateUIWithData(cities.first!)
+                    self?.view?.updateUIWithData(cities.first)
+                    
                 case .failed(message: let message):
-                    self.view?.showErrorMessage(message)
+                    self?.view?.showErrorMessage(message)
+                    self?.view?.updateUIWithData(nil)
                 }
             }
             .store(in: &cancellables)

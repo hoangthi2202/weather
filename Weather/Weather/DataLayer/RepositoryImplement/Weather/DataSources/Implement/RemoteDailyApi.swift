@@ -25,12 +25,15 @@ extension RemoteDailyApi: WeatherApi {
     func searchWeatherWithParam(_ param: [String : String]) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
         let urlString = param.reduce("\(apiConfig.baseURLString)/forecast/daily?appid=\(apiConfig.appAPI ?? "")") { partialResult, value in
             return "\(partialResult)&\(value.0)=\(value.1)"
-        }
-        WLog.debug("RemoteDailyApi request: ", urlString)
+        }.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
-        guard let url = URL(string: urlString) else {
+        guard
+            let urlString = urlString,
+            let url = URL(string: urlString)
+        else {
             return Fail(error: RepositoryError.urlNotCorrect).eraseToAnyPublisher()
         }
+        WLog.debug("RemoteDailyApi request: ", urlString)
         
         return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { element -> Data in

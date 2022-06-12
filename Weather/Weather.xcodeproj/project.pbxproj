@@ -43,6 +43,7 @@
 		87BBEAFF2855ED40008C7B4C /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEAFE2855ED40008C7B4C /* PresentationAssembly.swift */; };
 		87BBEB012855ED62008C7B4C /* UseCaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB002855ED62008C7B4C /* UseCaseAssembly.swift */; };
 		87BBEB032855ED8B008C7B4C /* RepositoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB022855ED8B008C7B4C /* RepositoriesAssembly.swift */; };
+		87BBEB052856104C008C7B4C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB042856104C008C7B4C /* UITableView+.swift */; };
 		87C1CA2E28547C04001BA1CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C1CA2D28547C04001BA1CC /* CoreDataManager.swift */; };
 		87C1CA3B2854937D001BA1CC /* WeatherEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C1CA372854937D001BA1CC /* WeatherEntity+CoreDataClass.swift */; };
 		87C1CA3C2854937D001BA1CC /* WeatherEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C1CA382854937D001BA1CC /* WeatherEntity+CoreDataProperties.swift */; };
@@ -114,6 +115,7 @@
 		87BBEAFE2855ED40008C7B4C /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		87BBEB002855ED62008C7B4C /* UseCaseAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseAssembly.swift; sourceTree = "<group>"; };
 		87BBEB022855ED8B008C7B4C /* RepositoriesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesAssembly.swift; sourceTree = "<group>"; };
+		87BBEB042856104C008C7B4C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		87C1CA2D28547C04001BA1CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		87C1CA372854937D001BA1CC /* WeatherEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		87C1CA382854937D001BA1CC /* WeatherEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				87C1CA4C2854C5EC001BA1CC /* Date+.swift */,
+				87BBEB042856104C008C7B4C /* UITableView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				87C1CA3C2854937D001BA1CC /* WeatherEntity+CoreDataProperties.swift in Sources */,
 				87B8ED1C2854490A005F0078 /* SearchDailyWeatherUseCase.swift in Sources */,
 				87BBEAFD2855EC6A008C7B4C /* Assembler+.swift in Sources */,
+				87BBEB052856104C008C7B4C /* UITableView+.swift in Sources */,
 				87B8ED192854489E005F0078 /* RepositoryError.swift in Sources */,
 				87B8ED2828545071005F0078 /* WeatherRepository.swift in Sources */,
 				87BBEAFF2855ED40008C7B4C /* PresentationAssembly.swift in Sources */,

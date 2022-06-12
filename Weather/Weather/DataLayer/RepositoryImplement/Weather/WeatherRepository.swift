@@ -134,7 +134,7 @@ extension WeatherRepository {
                 if response {
                     WLog.debug("WeatherRepository saved successfully")
                 } else {
-                    WLog.debug("WeatherRepository cannot save")
+                    WLog.debug("WeatherRepository nothing to save")
                 }
             })
             .store(in: &cancellables)

@@ -23,8 +23,15 @@ class WeatherTableViewDataSource: NSObject {
                            forCellReuseIdentifier: "WeatherCell")
     }
     
-    func updateData(_ data: [DomainWeather]) {
-        self.data = data
+    func updateData(_ data: [DomainWeather]?) {
+        if let data = data {
+            self.data = data.sorted(by: { item1, item2 in
+                item1.date.timeIntervalSince1970 < item2.date.timeIntervalSince1970
+            })
+        } else {
+            self.data.removeAll()
+        }
+        
         tableView?.reloadData()
     }
 }
