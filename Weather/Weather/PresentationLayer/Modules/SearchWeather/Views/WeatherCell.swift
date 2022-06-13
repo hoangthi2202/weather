@@ -33,6 +33,8 @@ class WeatherCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        imgIcon.isAccessibilityElement = true
+        imgIcon.accessibilityLabel = "weather icon"
     }
     
     func setupWithModel(_ model: WeatherCellModel) {
