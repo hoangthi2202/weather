@@ -9,6 +9,6 @@ import Foundation
 import Combine
 
 protocol WeatherRepositoryProtocol {
-    func searchWithParam(_ param: [String: String]) -> AnyPublisher<Response<[DomainCity]>, RepositoryError>
+    func searchWithCityName(_ cityName: String, numberDays: Int, unit: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError>
     func getURLForIconId(_ iconId: String) -> URL?
 }

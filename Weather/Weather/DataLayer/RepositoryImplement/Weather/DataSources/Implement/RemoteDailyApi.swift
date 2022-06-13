@@ -34,7 +34,6 @@ extension RemoteDailyApi: WeatherApi {
             return Fail(error: RepositoryError.urlNotCorrect).eraseToAnyPublisher()
         }
         WLog.debug("RemoteDailyApi request: ", urlString)
-        
         return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { element -> Data in
                 //WLog.debug("RemoteDailyApi Response: ", element.response)

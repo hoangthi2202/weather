@@ -44,6 +44,13 @@
 		87BBEB012855ED62008C7B4C /* UseCaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB002855ED62008C7B4C /* UseCaseAssembly.swift */; };
 		87BBEB032855ED8B008C7B4C /* RepositoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB022855ED8B008C7B4C /* RepositoriesAssembly.swift */; };
 		87BBEB052856104C008C7B4C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB042856104C008C7B4C /* UITableView+.swift */; };
+		87BBEB0B28578B59008C7B4C /* RemoteDailyApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB0A28578B59008C7B4C /* RemoteDailyApiTests.swift */; };
+		87BBEB0F28578C14008C7B4C /* MockApiConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB0E28578C14008C7B4C /* MockApiConfiguration.swift */; };
+		87BBEB12285792FD008C7B4C /* UseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB11285792FD008C7B4C /* UseCaseTests.swift */; };
+		87BBEB14285793C3008C7B4C /* MockWeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB13285793C3008C7B4C /* MockWeatherRepository.swift */; };
+		87BBEB1628579A4B008C7B4C /* SearchWeatherPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB1528579A4B008C7B4C /* SearchWeatherPresenterTests.swift */; };
+		87BBEB1928579B80008C7B4C /* MockSearchWeatherInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB1828579B80008C7B4C /* MockSearchWeatherInteractor.swift */; };
+		87BBEB1B28579C57008C7B4C /* MockSearchWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BBEB1A28579C57008C7B4C /* MockSearchWeatherView.swift */; };
 		87C1CA2E28547C04001BA1CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C1CA2D28547C04001BA1CC /* CoreDataManager.swift */; };
 		87C1CA3B2854937D001BA1CC /* WeatherEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C1CA372854937D001BA1CC /* WeatherEntity+CoreDataClass.swift */; };
 		87C1CA3C2854937D001BA1CC /* WeatherEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C1CA382854937D001BA1CC /* WeatherEntity+CoreDataProperties.swift */; };
@@ -116,6 +123,13 @@
 		87BBEB002855ED62008C7B4C /* UseCaseAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseAssembly.swift; sourceTree = "<group>"; };
 		87BBEB022855ED8B008C7B4C /* RepositoriesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesAssembly.swift; sourceTree = "<group>"; };
 		87BBEB042856104C008C7B4C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		87BBEB0A28578B59008C7B4C /* RemoteDailyApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDailyApiTests.swift; sourceTree = "<group>"; };
+		87BBEB0E28578C14008C7B4C /* MockApiConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiConfiguration.swift; sourceTree = "<group>"; };
+		87BBEB11285792FD008C7B4C /* UseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseTests.swift; sourceTree = "<group>"; };
+		87BBEB13285793C3008C7B4C /* MockWeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWeatherRepository.swift; sourceTree = "<group>"; };
+		87BBEB1528579A4B008C7B4C /* SearchWeatherPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWeatherPresenterTests.swift; sourceTree = "<group>"; };
+		87BBEB1828579B80008C7B4C /* MockSearchWeatherInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchWeatherInteractor.swift; sourceTree = "<group>"; };
+		87BBEB1A28579C57008C7B4C /* MockSearchWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchWeatherView.swift; sourceTree = "<group>"; };
 		87C1CA2D28547C04001BA1CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		87C1CA372854937D001BA1CC /* WeatherEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		87C1CA382854937D001BA1CC /* WeatherEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -226,6 +240,10 @@
 		87B8ECD2285431F6005F0078 /* WeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				87BBEB0C28578BEF008C7B4C /* Mocks */,
+				87BBEB0928578B08008C7B4C /* DomainLayer */,
+				87BBEB0828578AFF008C7B4C /* DataLayer */,
+				87BBEB0728578AE6008C7B4C /* SearchWeather */,
 				87B8ECD3285431F6005F0078 /* WeatherTests.swift */,
 			);
 			path = WeatherTests;
@@ -469,6 +487,57 @@
 			path = Implement;
 			sourceTree = "<group>";
 		};
+		87BBEB0728578AE6008C7B4C /* SearchWeather */ = {
+			isa = PBXGroup;
+			children = (
+				87BBEB1528579A4B008C7B4C /* SearchWeatherPresenterTests.swift */,
+			);
+			path = SearchWeather;
+			sourceTree = "<group>";
+		};
+		87BBEB0828578AFF008C7B4C /* DataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				87BBEB0A28578B59008C7B4C /* RemoteDailyApiTests.swift */,
+			);
+			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		87BBEB0928578B08008C7B4C /* DomainLayer */ = {
+			isa = PBXGroup;
+			children = (
+				87BBEB11285792FD008C7B4C /* UseCaseTests.swift */,
+			);
+			path = DomainLayer;
+			sourceTree = "<group>";
+		};
+		87BBEB0C28578BEF008C7B4C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				87BBEB1728579B50008C7B4C /* PresentationLayer */,
+				87BBEB0D28578BF8008C7B4C /* DataLayer */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		87BBEB0D28578BF8008C7B4C /* DataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				87BBEB0E28578C14008C7B4C /* MockApiConfiguration.swift */,
+				87BBEB13285793C3008C7B4C /* MockWeatherRepository.swift */,
+			);
+			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		87BBEB1728579B50008C7B4C /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				87BBEB1828579B80008C7B4C /* MockSearchWeatherInteractor.swift */,
+				87BBEB1A28579C57008C7B4C /* MockSearchWeatherView.swift */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
 		87C1CA2C28547BEC001BA1CC /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -698,7 +767,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87BBEB14285793C3008C7B4C /* MockWeatherRepository.swift in Sources */,
+				87BBEB1B28579C57008C7B4C /* MockSearchWeatherView.swift in Sources */,
+				87BBEB0B28578B59008C7B4C /* RemoteDailyApiTests.swift in Sources */,
+				87BBEB12285792FD008C7B4C /* UseCaseTests.swift in Sources */,
 				87B8ECD4285431F6005F0078 /* WeatherTests.swift in Sources */,
+				87BBEB1928579B80008C7B4C /* MockSearchWeatherInteractor.swift in Sources */,
+				87BBEB0F28578C14008C7B4C /* MockApiConfiguration.swift in Sources */,
+				87BBEB1628579A4B008C7B4C /* SearchWeatherPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -929,7 +1005,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B9B7R42RM6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoang.thi.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -949,7 +1025,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B9B7R42RM6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoang.thi.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -968,6 +1044,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B9B7R42RM6;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoang.thi.WeatherUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -986,6 +1063,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B9B7R42RM6;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoang.thi.WeatherUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -21,10 +21,10 @@ class SearchDailyWeatherUseCase {
 
 extension SearchDailyWeatherUseCase: SearchWeatherUseCaseProtocol {
     func execute(cityName: String, numberDays: Int, units: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
-        repository.searchWithParam([
-            "q"     : cityName,
-            "cnt"   : "\(numberDays)",
-            "units" : units
-        ])
+        repository.searchWithCityName(
+            cityName,
+            numberDays: numberDays,
+            unit: units
+        )
     }
 }

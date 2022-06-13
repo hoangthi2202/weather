@@ -19,14 +19,19 @@ class WeatherRepository {
 }
 
 extension WeatherRepository: WeatherRepositoryProtocol {
-    func searchWithParam(_ param: [String : String]) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
+    func searchWithCityName(_ cityName: String, numberDays: Int, unit: String) -> AnyPublisher<Response<[DomainCity]>, RepositoryError> {
         Future<Response<[DomainCity]>, RepositoryError> { [weak self] promise in
             guard let weakSelf = self else {
                 return
             }
+            let param = [
+                "q"     : cityName,
+                "cnt"   : "\(numberDays)",
+                "units" : unit
+            ]
             WLog.debug("WeatherRepository search with param: ", param)
             // check local storage
-            weakSelf.searchInLocalStorageWithParam(param) { [weak self] domainCities, localError in
+            weakSelf.searchInLocalStorageWithCityName(cityName) { [weak self] domainCities, localError in
                 guard let weakSelf = self else {
                     return
                 }
@@ -71,9 +76,9 @@ extension WeatherRepository: WeatherRepositoryProtocol {
 
 // MARK: - Private functions
 extension WeatherRepository {
-    private func searchInLocalStorageWithParam(_ param: [String: String], completion: @escaping ([DomainCity]?, RepositoryError?) -> Void) {
+    private func searchInLocalStorageWithCityName(_ cityName: String, completion: @escaping ([DomainCity]?, RepositoryError?) -> Void) {
         WLog.debug("WeatherRepository search in local")
-        guard let cityName = param["q"] else {
+        guard cityName.count > 0 else {
             completion(nil, .notFound)
             return
         }

@@ -36,7 +36,7 @@
 
 - [x] Design app's architecture: VIPER
 - [x] UI should be looks like in attachment
-- [ ] UnitTests
+- [x] UnitTests
 - [ ] Acceptance Tests
 - [x] Exception handling
 - [x] Caching handling
