@@ -37,7 +37,7 @@
 - [x] Design app's architecture: VIPER
 - [x] UI should be looks like in attachment
 - [x] UnitTests
-- [ ] Acceptance Tests
+- [x] Acceptance Tests
 - [x] Exception handling
 - [x] Caching handling
 - [x] Accessibility for Disability Supports: VoiceOver, Scaling Text
